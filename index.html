@@ -1,174 +1,186 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RANGO DE PICAS 🍆😏🐱🍕</title>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-  <style>
-    body {
-      font-family: 'Comic Sans MS', cursive;
-      background-color: #fff0d6;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      text-align: center;
-      padding: 25px 10px;
-      background-color: #ff69b4;
-      color: white;
-      font-size: 2em;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .ranking {
-      background-color: #fff;
-      color: #c71585;
-      padding: 10px;
-      font-size: 1.2em;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 8px;
-      border-radius: 8px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .container {
-      max-width: 480px;
-      margin: 20px auto;
-      padding: 15px;
-    }
-    .pessoa {
-      background: #fff;
-      margin-bottom: 14px;
-      padding: 14px;
-      border-radius: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-left: 5px solid #ff69b4;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    .pessoa-info h2 {
-      margin: 0 0 5px;
-      color: #ff1493;
-    }
-    .pontos {
-      font-size: 0.9em;
-      color: #555;
-    }
-    .botoes {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    button {
-      padding: 7px 10px;
-      background-color: #ff69b4;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
-      font-size: 0.85em;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #ff1493;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RANGO DE PICAS 🍆😏🐱🍕</title>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+  body {
+    font-family: 'Comic Sans MS', cursive;
+    background-color: #fff0d6;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    text-align: center;
+    padding: 25px 10px;
+    background-color: #ff69b4;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .ranking {
+    background-color: #fff;
+    color: #c71585;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+    border-radius: 8px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container {
+    max-width: 480px;
+    margin: 20px auto;
+    padding: 15px;
+  }
+  .pessoa {
+    background: #fff;
+    margin-bottom: 14px;
+    padding: 14px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #ff69b4;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  .pessoa-info h2 {
+    margin: 0 0 5px;
+    color: #ff1493;
+  }
+  .pontos {
+    font-size: 0.9em;
+    color: #555;
+  }
+  .botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  button {
+    padding: 7px 10px;
+    background-color: #ff69b4;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.85em;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #ff1493;
+  }
+</style>
 </head>
 <body>
-  <header>RANGO DE PICAS 🍆😏🐱🍕</header>
-  <div id="top3" class="ranking"></div>
-  <div class="container" id="ranking"></div>
+<header>RANGO DE PICAS 🍆😏🐱🍕</header>
+<div id="top3" class="ranking"></div>
+<div class="container" id="ranking"></div>
 
-  <script>
-    // Configuração Firebase que você me enviou:
-    const firebaseConfig = {
-      apiKey: "AIzaSyCy_5z-29wXcnlgN53Dmy1sknoB8bPsgT8",
-      authDomain: "pizza-dos-mlk.firebaseapp.com",
-      databaseURL: "https://pizza-dos-mlk-default-rtdb.firebaseio.com",
-      projectId: "pizza-dos-mlk",
-      storageBucket: "pizza-dos-mlk.firebasestorage.app",
-      messagingSenderId: "392292628803",
-      appId: "1:392292628803:web:95b5743f21deb49550d7f6"
-    };
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCy_5z-29wXcnlgN53Dmy1sknoB8bPsgT8",
+    authDomain: "pizza-dos-mlk.firebaseapp.com",
+    databaseURL: "https://pizza-dos-mlk-default-rtdb.firebaseio.com",
+    projectId: "pizza-dos-mlk",
+    storageBucket: "pizza-dos-mlk.firebasestorage.app",
+    messagingSenderId: "392292628803",
+    appId: "1:392292628803:web:95b5743f21deb49550d7f6"
+  };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    const dbRef = db.ref("pessoas");
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const dbRef = db.ref("pessoas");
 
-    const nomesPadrao = [
-      "Yago", "Aleandro", "Orlean", "Joao", "Matheus",
-      "Davi", "Kelton", "Gabriela", "Luiz", "Alessandro"
-    ];
+  const nomesPadrao = [
+    "Yago", "Aleandro", "Orlean", "Joao", "Matheus",
+    "Davi", "Kelton", "Gabriela", "Luiz", "Alessandro"
+  ];
 
-    let pessoas = [];
+  let pessoas = [];
 
-    function initDefault() {
-      const dados = nomesPadrao.map(nome => ({
-        nome, doce: 0, salgado: 0
-      }));
-      dbRef.set(dados);
-    }
+  function initDefault() {
+    const dados = nomesPadrao.map(nome => ({
+      nome, doce: 0, salgado: 0
+    }));
+    dbRef.set(dados);
+  }
 
-    function render() {
-      const cont = document.getElementById("ranking");
-      cont.innerHTML = "";
-      const ordenadas = [...pessoas].sort((a, b) => a.nome.localeCompare(b.nome));
+  function render() {
+    const cont = document.getElementById("ranking");
+    cont.innerHTML = "";
+    const ordenadas = [...pessoas].sort((a, b) => a.nome.localeCompare(b.nome));
 
-      ordenadas.forEach((p) => {
-        const total = p.doce + p.salgado;
-        const div = document.createElement("div");
-        div.className = "pessoa";
-        div.innerHTML = `
-          <div class="pessoa-info">
-            <h2>🍕 ${p.nome}</h2>
-            <div class="pontos">🍭 Doce: ${p.doce} | 🧀 Salgado: ${p.salgado} | Total: ${total}</div>
-          </div>
-          <div class="botoes">
-            <button onclick="alterar('${p.nome}', 'doce', 1)">+ Doce</button>
-            <button onclick="alterar('${p.nome}', 'doce', -1)">- Doce</button>
-            <button onclick="alterar('${p.nome}', 'salgado', 1)">+ Salgada</button>
-            <button onclick="alterar('${p.nome}', 'salgado', -1)">- Salgada</button>
-          </div>`;
-        cont.appendChild(div);
-      });
+    ordenadas.forEach((p) => {
+      const total = p.doce + p.salgado;
+      const div = document.createElement("div");
+      div.className = "pessoa";
+      div.innerHTML = `
+        <div class="pessoa-info">
+          <h2>🍕 ${p.nome}</h2>
+          <div class="pontos">🍭 Doce: ${p.doce} | 🧀 Salgado: ${p.salgado} | Total: ${total}</div>
+        </div>
+        <div class="botoes">
+          <button data-nome="${p.nome}" data-tipo="doce" data-valor="1">+ Doce</button>
+          <button data-nome="${p.nome}" data-tipo="doce" data-valor="-1">- Doce</button>
+          <button data-nome="${p.nome}" data-tipo="salgado" data-valor="1">+ Salgada</button>
+          <button data-nome="${p.nome}" data-tipo="salgado" data-valor="-1">- Salgada</button>
+        </div>`;
+      cont.appendChild(div);
+    });
 
-      ordenarRanking();
-    }
+    addButtonListeners();
+    ordenarRanking();
+  }
 
-    function alterar(nome, tipo, valor) {
-      const nova = pessoas.map(p => {
-        if (p.nome === nome) {
-          return {
-            ...p,
-            [tipo]: Math.max(0, p[tipo] + valor)
-          };
-        }
-        return p;
-      });
-      dbRef.set(nova);
-    }
-
-    function ordenarRanking() {
-      const top = [...pessoas].sort((a,b) => (b.doce + b.salgado) - (a.doce + a.salgado)).slice(0,3);
-      const medalhas = ["🥇", "🥈", "🥉"];
-      const el = document.getElementById("top3");
-      el.innerHTML = top.map((p, i) => `${medalhas[i]} ${p.nome} (${p.doce + p.salgado} fatias)`).join("<br>");
-    }
-
-    dbRef.on("value", (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        pessoas = data;
-        render();
-      } else {
-        initDefault();
+  function addButtonListeners() {
+    const buttons = document.querySelectorAll(".botoes button");
+    buttons.forEach(btn => {
+      btn.onclick = () => {
+        const nome = btn.getAttribute("data-nome");
+        const tipo = btn.getAttribute("data-tipo");
+        const valor = parseInt(btn.getAttribute("data-valor"));
+        alterar(nome, tipo, valor);
       }
     });
-  </script>
+  }
+
+  function alterar(nome, tipo, valor) {
+    const nova = pessoas.map(p => {
+      if (p.nome === nome) {
+        return {
+          ...p,
+          [tipo]: Math.max(0, p[tipo] + valor)
+        };
+      }
+      return p;
+    });
+    dbRef.set(nova);
+  }
+
+  function ordenarRanking() {
+    const top = [...pessoas].sort((a,b) => (b.doce + b.salgado) - (a.doce + a.salgado)).slice(0,3);
+    const medalhas = ["🥇", "🥈", "🥉"];
+    const el = document.getElementById("top3");
+    el.innerHTML = top.map((p, i) => `${medalhas[i]} ${p.nome} (${p.doce + p.salgado} fatias)`).join("<br>");
+  }
+
+  dbRef.on("value", (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      pessoas = data;
+      render();
+    } else {
+      initDefault();
+    }
+  });
+</script>
 </body>
 </html>
