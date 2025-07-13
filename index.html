@@ -119,7 +119,7 @@
       cont.innerHTML = "";
       const ordenadas = [...pessoas].sort((a, b) => a.nome.localeCompare(b.nome));
 
-      ordenadas.forEach((p, i) => {
+      ordenadas.forEach((p) => {
         const total = p.doce + p.salgado;
         const div = document.createElement("div");
         div.className = "pessoa";
@@ -129,10 +129,10 @@
             <div class="pontos">🍭 Doce: ${p.doce} | 🧀 Salgado: ${p.salgado} | Total: ${total}</div>
           </div>
           <div class="botoes">
-            <button onclick="alterar(${i}, 'doce', 1)">+ Doce</button>
-            <button onclick="alterar(${i}, 'doce', -1)">- Doce</button>
-            <button onclick="alterar(${i}, 'salgado', 1)">+ Salgada</button>
-            <button onclick="alterar(${i}, 'salgado', -1)">- Salgada</button>
+            <button onclick="alterar('${p.nome}', 'doce', 1)">+ Doce</button>
+            <button onclick="alterar('${p.nome}', 'doce', -1)">- Doce</button>
+            <button onclick="alterar('${p.nome}', 'salgado', 1)">+ Salgada</button>
+            <button onclick="alterar('${p.nome}', 'salgado', -1)">- Salgada</button>
           </div>`;
         cont.appendChild(div);
       });
@@ -140,9 +140,16 @@
       ordenarRanking();
     }
 
-    function alterar(i, tipo, valor) {
-      const nova = [...pessoas];
-      nova[i][tipo] = Math.max(0, nova[i][tipo] + valor);
+    function alterar(nome, tipo, valor) {
+      const nova = pessoas.map(p => {
+        if (p.nome === nome) {
+          return {
+            ...p,
+            [tipo]: Math.max(0, p[tipo] + valor)
+          };
+        }
+        return p;
+      });
       dbRef.set(nova);
     }
 
@@ -165,4 +172,3 @@
   </script>
 </body>
 </html>
-
